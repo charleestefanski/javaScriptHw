@@ -13,7 +13,7 @@
         dot_flag = false;
 
     var x = "black",
-        y = 2;
+        y = 10;
     
     function setup() {
         canvas = document.getElementById('myCanvas');
@@ -55,22 +55,20 @@
             y = y + 2;
         }
         if (key == 40) {
-            y = y - 2;
+            if (y >= 4) {
+                y = y - 2;
+            }
         }
         if (key == 32) {
             ctx.clearRect(0, 0, w, h);
-            document.getElementById("myCanvas").style.display = "none";
         }
     }
 
     function draw() {
         ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-        ctx.strokeStyle = x;
-        ctx.lineWidth = y;
-        ctx.stroke();
-        ctx.closePath();
+        ctx.arc(currX, currY, y / 2, 0, 2 * Math.PI)
+        ctx.fill();
+        tx.closePath();
     }
 
     function findxy(res, e) {
@@ -85,7 +83,8 @@
             if (dot_flag) {
                 ctx.beginPath();
                 ctx.fillStyle = x;
-                ctx.fillRect(currX, currY, 2, 2);
+                ctx.arc(currX, currY, y / 2, 0, 2 * Math.PI)
+                ctx.fill();
                 ctx.closePath();
                 dot_flag = false;
             }
